@@ -1,6 +1,6 @@
 datasource db {
   provider = "mysql"
-  url      = env("PLANETSCALE_DB")
+  url      = env("PLANETSCALE_PRISMA_DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
