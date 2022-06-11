@@ -11,7 +11,7 @@ describe('Home', () => {
         greeting: 'greeting',
       },
     }));
-    render(<Home />);
+    render(<Home stars={[]} />);
     expect(screen.getByText(/hello world/i)).toBeInTheDocument();
   });
 
@@ -21,7 +21,7 @@ describe('Home', () => {
         greeting: 'greeting',
       },
     }));
-    render(<Home />);
+    render(<Home stars={[]} />);
     expect(screen.getByText(/greeting/i)).toBeInTheDocument();
   });
 
@@ -29,7 +29,7 @@ describe('Home', () => {
     (useQuery as jest.Mock).mockImplementation(() => ({
       isLoading: true,
     }));
-    render(<Home />);
+    render(<Home stars={[]} />);
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
@@ -39,7 +39,7 @@ describe('Home', () => {
         message: 'oops',
       },
     }));
-    render(<Home />);
+    render(<Home stars={[]} />);
     expect(screen.getByText(/oops/i)).toBeInTheDocument();
   });
 });
