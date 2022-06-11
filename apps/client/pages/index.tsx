@@ -1,9 +1,15 @@
 import { Button } from '@noodle/design-system';
 import { useToggleTheme } from '@noodle/stitches';
-import { NextPage } from 'next';
+import { Star } from '@prisma/client';
+import { GetServerSideProps, NextPage } from 'next';
+import prisma from '../utils/prisma';
 import { useQuery } from '../utils/trpc';
 
-const Home: NextPage = () => {
+type HomeProps = {
+  readonly stars: Star[];
+};
+
+const Home: NextPage<HomeProps> = ({ stars }) => {
   const { data, isLoading, error } = useQuery([
     'hello.getGreeting',
     { greeting: 'noodle' },
@@ -26,8 +32,27 @@ const Home: NextPage = () => {
       </button>
       <Button>I&apos;m from the design-system lib</Button>
       {data && <p>{data.greeting}</p>}
+      {stars.length > 0 ? (
+        <ul>
+          {stars.map((star) => (
+            <li key={star.id}>{star.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No stars found :(</p>
+      )}
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const stars = await prisma.star.findMany();
+
+  return {
+    props: {
+      stars,
+    },
+  };
 };
 
 export default Home;

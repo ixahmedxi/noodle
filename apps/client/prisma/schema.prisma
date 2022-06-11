@@ -1,0 +1,15 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model Star {
+  id              Int       @default(autoincrement()) @id
+  name            String    @db.VarChar(255)
+}
