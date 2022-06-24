@@ -66,3 +66,14 @@ model Module {
   name      String
   code      String
 }
+
+model Task {
+  id        String    @id @default(cuid())
+  name      String
+  description String
+  importance  String?
+  completion  Boolean     @default(false)
+  date_created  DateTime  @default(now())
+  deadline      DateTime  
+  type          String
+}
