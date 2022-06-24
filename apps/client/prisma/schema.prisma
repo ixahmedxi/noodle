@@ -11,75 +11,75 @@ datasource db {
 
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                    String        @id @default(cuid())
+  userId                String
+  type                  String
+  provider              String
+  providerAccountId     String
+  refresh_token         String?       @db.Text
+  access_token          String?       @db.Text
+  expires_at            Int?
+  token_type            String?
+  scope                 String?
+  id_token              String?       @db.Text
+  session_state         String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                  User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                    String        @id @default(cuid())
+  sessionToken          String        @unique
+  userId                String
+  expires               DateTime
+  user                  User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  role          String?       @default("student")
+  id                    String        @id @default(cuid())
+  name                  String?
+  email                 String?       @unique
+  emailVerified         DateTime?
+  image                 String?
+  accounts              Account[]
+  sessions              Session[]
+  role                  String?       @default("student")
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+  identifier            String
+  token                 String        @unique
+  expires               DateTime
 
   @@unique([identifier, token])
 }
 
 model Subject {
-  id        String    @id @default(cuid())
-  name      String
+  id                    String        @id @default(cuid())
+  name                  String
 }
 
 model Module {
-  id        String    @id @default(cuid())
-  name      String
-  code      String
+  id                    String        @id @default(cuid())
+  name                  String
+  code                  String
 }
 
 model Task {
-  id        String    @id @default(cuid())
-  name      String
-  description String
-  importance  String?
-  completion  Boolean     @default(false)
-  date_created  DateTime  @default(now())
-  deadline      DateTime  
-  type          String
+  id                    String        @id @default(cuid())
+  name                  String
+  description           String
+  importance            String?
+  completion            Boolean       @default(false)
+  date_created          DateTime      @default(now())
+  deadline              DateTime  
+  type                  String
 }
 
 model Subtask {
-  id        String    @id @default(cuid())
-  name      String
-  completion  Boolean     @default(false)
+  id                    String        @id @default(cuid())
+  name                  String
+  completion            Boolean       @default(false)
 }
