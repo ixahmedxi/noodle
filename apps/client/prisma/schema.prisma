@@ -55,3 +55,9 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Module {
+  id        String    @id @default(cuid())
+  name      String
+  code      String
+}
