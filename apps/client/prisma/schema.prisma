@@ -77,3 +77,9 @@ model Task {
   deadline      DateTime  
   type          String
 }
+
+model Subtask {
+  id        String    @id @default(cuid())
+  name      String
+  completion  Boolean     @default(false)
+}
