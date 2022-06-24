@@ -56,6 +56,11 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Subject {
+  id        String    @id @default(cuid())
+  name      String
+}
+
 model Module {
   id        String    @id @default(cuid())
   name      String
