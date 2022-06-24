@@ -45,7 +45,7 @@ model User {
   image                 String?
   accounts              Account[]
   sessions              Session[]
-  role                  String?       @default("student")
+  role                  String        @default("student")
 }
 
 model VerificationToken {
@@ -64,17 +64,17 @@ model Subject {
 model Module {
   id                    String        @id @default(cuid())
   name                  String
-  code                  String
+  code                  String        @unique
 }
 
 model Task {
   id                    String        @id @default(cuid())
   name                  String
-  description           String
+  description           String?
   importance            String?
   completion            Boolean       @default(false)
   date_created          DateTime      @default(now())
-  deadline              DateTime  
+  deadline              DateTime?  
   type                  String
 }
 
